@@ -31,22 +31,24 @@ class DoublyLinkedList:
             self.tail = new_node
 
     def delete_front(self):
-        if self.is_empty():
-            raise IndexError("List is empty")
-        if self.head == self.tail:
-            self.head = self.tail = None
+        if not self.is_empty():
+            if self.head == self.tail:
+                self.head = self.tail = None
+            else:
+                self.head = self.head.next
+                self.head.prev = None
         else:
-            self.head = self.head.next
-            self.head.prev = None
+            raise IndexError("List is empty")
 
     def delete_end(self):
-        if self.is_empty():
-            raise IndexError("List is empty")
-        if self.head == self.tail:
-            self.head = self.tail = None
+        if not self.is_empty():
+            if self.head == self.tail:
+                self.head = self.tail = None
+            else:
+                self.tail = self.tail.prev
+                self.tail.next = None
         else:
-            self.tail = self.tail.prev
-            self.tail.next = None
+            raise IndexError("List is empty")
 
     def display_forward(self):
         elements = []
@@ -68,8 +70,8 @@ dll = DoublyLinkedList()
 dll.insert_end(1)
 dll.insert_end(2)
 dll.insert_front(0)
-print(dll.display_forward())  
+print(dll.display_forward()) 
 print(dll.display_backward()) 
 dll.delete_front()
 dll.delete_end()
-print(dll.display_forward())  
+print(dll.display_forward())
